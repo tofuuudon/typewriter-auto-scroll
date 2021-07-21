@@ -15,7 +15,9 @@ Work faster and more elegantly.
 ### Mikey Lau
 
 [Portfolio](https://mikeylau.uk)
+
 [Github](https://github.com/MikeyJL)
+
 [Typewriter repo](https://github.com/MikeyJL/typewriter-auto-scroll)
 
 ## Release Notes
