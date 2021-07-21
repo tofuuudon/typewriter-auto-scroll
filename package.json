@@ -1,6 +1,6 @@
 {
   "name": "typewriter-auto-scroll",
-  "displayName": "typewriter-auto-scroll",
+  "displayName": "Typewriter Auto-scroll",
   "description": "Keeps the focused line in the middle of your screen.",
   "version": "0.0.1",
   "engines": {

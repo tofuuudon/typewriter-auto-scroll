@@ -15,8 +15,7 @@ const vscode = require('vscode')
 function activate (context) {
   const config = vscode.workspace.getConfiguration('typewriterAutoScroll')
   const enable = config.get('enable')
-  const controller = new TypewriterAutoScroll(enable)
-  context.subscriptions.push(controller)
+  context.subscriptions.push(new TypewriterAutoScroll(enable))
 }
 
 /**
@@ -51,11 +50,11 @@ class TypewriterAutoScroll {
     }
 
     const subscriptions = []
-    vscode.workspace.onDidChangeConfiguration(this.onConfigurationChanged, this, subscriptions)
-    vscode.window.onDidChangeTextEditorSelection(this.onSelectionChange, this, subscriptions)
     vscode.commands.registerCommand('typewriterAutoScroll.toggleEnable', () => {
       this.toggleEnable()
     })
+    vscode.workspace.onDidChangeConfiguration(this.onConfigurationChange, this, subscriptions)
+    vscode.window.onDidChangeTextEditorSelection(this.onSelectionChange, this, subscriptions)
   }
 
   /**
@@ -66,7 +65,6 @@ class TypewriterAutoScroll {
 
     const configuration = vscode.workspace.getConfiguration('typewriterAutoScroll')
     configuration.update('enable', this.enable)
-
     if (this.enable) {
       vscode.window.showInformationMessage('Typewriter auto-scroll is toggled on!')
       this.statusBar.text = 'Typewriter ON'
@@ -74,7 +72,6 @@ class TypewriterAutoScroll {
       vscode.window.showInformationMessage('Typewriter auto-scroll is toggled off!')
       this.statusBar.text = 'Typewriter OFF'
     }
-
     this.statusBar.show()
   }
 
@@ -93,7 +90,7 @@ class TypewriterAutoScroll {
   /**
    * Updates the status and enabled state from the extension settings.
    */
-  onConfigurationChanged () {
+  onConfigurationChange () {
     const configuration = vscode.workspace.getConfiguration('typewriterAutoScroll')
     if (configuration.get('enable')) {
       this.enable = true
