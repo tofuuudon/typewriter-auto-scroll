@@ -24,6 +24,6 @@ Work faster and more elegantly.
 
 ## Release Notes
 
-### 1.0
+### 1.0 Initial release
 
-Initial release. Just a basic function at the moment. There are a few things on the road-map but don't expect any new updates yet.
+Just a basic function at the moment. There are a few things on the road-map but don't expect any new updates yet.
