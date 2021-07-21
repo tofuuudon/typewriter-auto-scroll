@@ -2,6 +2,7 @@
   "name": "typewriter-auto-scroll",
   "displayName": "Typewriter Auto-scroll",
   "description": "Keeps the focused line in the middle of your screen.",
+  "publisher": "MikeyLau",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.58.0"
