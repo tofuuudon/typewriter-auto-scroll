@@ -1,4 +1,6 @@
-# Introduction
+# Typewriter Auto-scroll VSCode Extension
+
+## Introduction
 
 Are you a VIM user? Frustrated with scrolling when you start getting close to the bottom of your page? Don't want to use ```page-up``` or ```page-down```?
 
