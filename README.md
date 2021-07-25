@@ -27,3 +27,7 @@ Work faster and more elegantly.
 ### 1.0 Initial release
 
 Just a basic function at the moment. There are a few things on the road-map but don't expect any new updates yet.
+
+### 1.1 Bug fix
+
+Made typewriter-autoscroll ignore selection changes from mouse input to improve UX.

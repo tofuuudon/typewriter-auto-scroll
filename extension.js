@@ -78,8 +78,8 @@ class TypewriterAutoScroll {
   /**
    * Centers the viewport onto the focused line when typewriter auto-scroll is enabled.
    */
-  onSelectionChange () {
-    if (this.enable) {
+  onSelectionChange (instance) {
+    if (this.enable && instance.kind !== 2) {
       const editor = vscode.window.activeTextEditor
       const selection = editor.selection
       const range = new vscode.Range(selection.active, selection.active)
