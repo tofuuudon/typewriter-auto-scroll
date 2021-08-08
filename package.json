@@ -12,12 +12,13 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:typewriterAutoScroll.toggleEnable"
+    "onCommand:toggleTypewriter"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/MikeyJL/typewriter-auto-scroll"
   },
+  "icon": "images/typewriter.png",
   "main": "./extension.js",
   "contributes": {
     "configuration": {
@@ -27,13 +28,22 @@
           "type": "boolean",
           "default": true,
           "description": "Toggle typewriter"
+        },
+        "typewriterAutoScroll.offset": {
+          "type": "number",
+          "default": 0,
+          "description": "Offsets the caret/focused line position by line amount. Example: an offset of -10 will move the focused line 10 lines down relative to the center of the editor."
         }
       }
     },
     "commands": [
       {
-        "command": "typewriterAutoScroll.toggleEnable",
-        "title": "Toggle typewriter auto-scroll"
+        "command": "toggleTypewriter",
+        "title": "Typewriter: Toggle typewriter"
+      },
+      {
+        "command": "changeTypewriterOffset",
+        "title": "Typewriter: Change the offset of the centered/focused line"
       }
     ]
   },
