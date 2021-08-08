@@ -15,7 +15,8 @@ const vscode = require('vscode')
 function activate (context) {
   const config = vscode.workspace.getConfiguration('typewriterAutoScroll')
   const enable = config.get('enable')
-  context.subscriptions.push(new TypewriterAutoScroll(enable))
+  const offset = config.get('offset')
+  context.subscriptions.push(new TypewriterAutoScroll(enable, offset))
 }
 
 /**
@@ -31,8 +32,9 @@ class TypewriterAutoScroll {
    * The state of the typewriter extension.
    * @param {boolean} enable - Whether the extension is enabled.
    */
-  constructor (enable) {
+  constructor (enable, offset) {
     this.enable = enable
+    this.offset = offset
     if (!this.statusBar) {
       this.statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
     }
@@ -50,8 +52,11 @@ class TypewriterAutoScroll {
     }
 
     const subscriptions = []
-    vscode.commands.registerCommand('typewriterAutoScroll.toggleEnable', () => {
+    vscode.commands.registerCommand('toggleTypewriter', () => {
       this.toggleEnable()
+    })
+    vscode.commands.registerCommand('changeTypewriterOffset', () => {
+      this.changeOffset()
     })
     vscode.workspace.onDidChangeConfiguration(this.onConfigurationChange, this, subscriptions)
     vscode.window.onDidChangeTextEditorSelection(this.onSelectionChange, this, subscriptions)
@@ -66,13 +71,25 @@ class TypewriterAutoScroll {
     const configuration = vscode.workspace.getConfiguration('typewriterAutoScroll')
     configuration.update('enable', this.enable)
     if (this.enable) {
-      vscode.window.showInformationMessage('Typewriter auto-scroll is toggled on!')
+      vscode.window.showInformationMessage('Typewriter: toggled on!')
       this.statusBar.text = 'Typewriter ON'
     } else {
-      vscode.window.showInformationMessage('Typewriter auto-scroll is toggled off!')
+      vscode.window.showInformationMessage('Typewriter: toggled off!')
       this.statusBar.text = 'Typewriter OFF'
     }
     this.statusBar.show()
+  }
+
+  async changeOffset () {
+    const newOffset = await vscode.window.showInputBox({
+      title: 'Specify a new offset from the centered/focused line'
+    })
+    if (newOffset) {
+      this.offset = parseInt(newOffset)
+      const configuration = vscode.workspace.getConfiguration('typewriterAutoScroll')
+      configuration.update('offset', parseInt(newOffset))
+      vscode.window.showInformationMessage(`Typewriter: changed offset to ${newOffset}`)
+    }
   }
 
   /**
@@ -82,7 +99,8 @@ class TypewriterAutoScroll {
     if (this.enable && instance.kind !== 2) {
       const editor = vscode.window.activeTextEditor
       const selection = editor.selection
-      const range = new vscode.Range(selection.active, selection.active)
+      const centerScrollPosition = new vscode.Position(selection.active.line + this.offset, 0)
+      const range = new vscode.Range(centerScrollPosition, centerScrollPosition)
       editor.revealRange(range, vscode.TextEditorRevealType.InCenter)
     }
   }
