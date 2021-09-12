@@ -35,4 +35,4 @@ Work faster and more elegantly.
 
 ## Author
 
-[![Mikey Lau](https://firebasestorage.googleapis.com/v0/b/mikey-lau.appspot.com/o/mikey-lau.png?alt=media&token=f978fe3f-bd95-4cdf-ae7e-7204c5ff2d54)](https://github.com/MikeyJL)
+[![Mikey Lau](https://res.cloudinary.com/dqzwrwyzn/image/upload/v1631438979/team/mikey_phbixs.png)](https://github.com/MikeyJL)
