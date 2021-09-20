@@ -99,7 +99,7 @@ class TypewriterAutoScroll {
     if (this.enable && instance.kind !== 2) {
       const editor = vscode.window.activeTextEditor
       const selection = editor.selection
-      const centerScrollPosition = new vscode.Position(selection.active.line + this.offset, 0)
+      const centerScrollPosition = new vscode.Position(selection.active.line + this.offset, selection.active.character)
       const range = new vscode.Range(centerScrollPosition, centerScrollPosition)
       editor.revealRange(range, vscode.TextEditorRevealType.InCenter)
     }
